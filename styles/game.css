@@ -1,0 +1,45 @@
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+.card {
+    width: 100px;
+    height: 150px;
+    perspective: 1000px;
+}
+  
+.card div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+}
+  
+.card-back {
+    background: gray;
+}
+  
+.card-front {
+    background: white;
+    transform: rotateY(180deg);
+}
+  
+.card.flipped .card-front {
+    transform: rotateY(0);
+}
+  
+.card.flipped .card-back {
+    transform: rotateY(-180deg);
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background-image: url(/assets/fundo.jpeg);
+    background-size: cover;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
