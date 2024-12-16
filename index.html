@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>card test</title>
+    <title>PokeCards</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,20 +18,27 @@
 
 <body>
     <main>
+    <audio id="musica" autoplay loop>
+        <source src="/assets/Pokemon FireRed_LeafGreen- Professor Oak.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+      </audio>
+      <button id="btnMute">Mute</button>
+
         <section class="start-game">
         <div class="titles">
             <h1>PokeCards</h1>
             <h2>Encontre a Evolução inicial e final!</h2>
         </div>
         <div class="buttons">
-            <a id="a-btn" href="jogo.html">Start Game</a>
-            <span class="contador">Quantidade de Vitorias :</span>
+            <a id="a-btn" href="jogo.html"><h1>Start Game </h1></a>
+            <span class="contador">Quantidade de Vitórias: <span id="contador-vitorias">0</span></span>
         </div>
         <div class="overlay"></div>
         </section>
     </main>
-
     <footer></footer>
+    <script src="/script/Main.js"></script>
 </body>
-
 </html>
+
+

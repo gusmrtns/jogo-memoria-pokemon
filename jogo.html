@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/game.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+    <title>PokeCards</title>
 </head>
 <body>
-    <a href="index.html">volte para página inicial</a>
-    <div id="game-board" class="game-board">
-        <!-- Cartas serão geradas dinamicamente pelo JavaScript -->
-    </div>
+    <main>
+        <audio id="musica" autoplay loop>
+            <source src="/assets/Pokemon FireRed_LeafGreen- Professor Oak.mp3" type="audio/mp3">
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
+          <button id="btnMute">Mute</button>
+        <section class="start-game">
+            <section class="tittle">
+                <div id="message"></div>
+                <h1><a href="index.html">PokeCards</a></h1>
+            </section>
+            <div id="game-board" class="game-board"></div>
+            <button type="button" id="buttonRestart">Reiniciar Jogo</button>
+        </section>
+    </main>
+    <script src="/script/Main.js"></script>
     <script src="/script/GameLogic.js"></script>
-
 </body>
 </html>

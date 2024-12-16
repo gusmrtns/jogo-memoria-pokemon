@@ -1,15 +1,137 @@
+/* ----------------------------------------
+   RESET GLOBAL E ESTILIZAÇÃO BÁSICA
+---------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ----------------------------------------
+   ESTILO DO CORPO DA PÁGINA
+---------------------------------------- */
+body {
+    height: 100vh;
+    display: flex;
+    background-image: url('/assets/fundo.jpeg');
+    background-size: cover;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* ----------------------------------------
+   ESTILO DO CONTAINER PRINCIPAL (MAIN)
+---------------------------------------- */
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ----------------------------------------
+   ESTILO DO CONTAINER INICIAL DO JOGO (start-game)
+---------------------------------------- */
+.start-game {
+    background-color: black;
+    width: 70%;
+    height: 93%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5%;
+    gap: 1em;
+    position: relative;  /* Permite que o layout dentro do start-game fique no nível adequado */
+}
+
+/* ----------------------------------------
+   ESTILO DO TÍTULO
+---------------------------------------- */
+.tittle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2.5em;
+}
+
+/* ----------------------------------------
+   ESTILO DOS LINKS (a)
+---------------------------------------- */
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 3em;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* ----------------------------------------
+   ESTILO DO TABULEIRO DE JOGO (game-board)
+---------------------------------------- */
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  }
-  
+    gap: 5em;
+    height: 60%;
+}
+
+/* ----------------------------------------
+   ESTILO DO BOTÃO DE RECOMEÇAR
+---------------------------------------- */
+#buttonRestart {
+    display: inline-block;
+    text-align: center;
+    color: black;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    padding: 1em 3em;
+    font-weight: 800;
+    font-size: 1.2em;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 5%;
+    margin-top: 3.5em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#buttonRestart:hover {
+    background-color: lightgray;
+    transform: scale(1.05);
+}
+
+/* ----------------------------------------
+   ESTILO DA MENSAGEM
+---------------------------------------- */
+#message {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 80%;
+}
+
+/* ----------------------------------------
+   ESTILO DAS CARTAS DO JOGO (card)
+---------------------------------------- */
 .card {
-    width: 100px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     perspective: 1000px;
 }
-  
+
 .card div {
     width: 100%;
     height: 100%;
@@ -17,29 +139,92 @@
     backface-visibility: hidden;
     transition: transform 0.5s;
 }
-  
+
 .card-back {
-    background: gray;
+    background-image: url('/assets/carta.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
-  
+
 .card-front {
-    background: white;
     transform: rotateY(180deg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
-  
+
 .card.flipped .card-front {
     transform: rotateY(0);
 }
-  
+
 .card.flipped .card-back {
     transform: rotateY(-180deg);
 }
 
-body {
-    height: 100vh;
-    display: flex;
-    background-image: url(/assets/fundo.jpeg);
-    background-size: cover;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+/* ----------------------------------------
+   IMAGENS PARA OS POKÉMONS NAS CARTAS
+---------------------------------------- */
+.card-front.charmander {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/g1-generations/en/med/charmander-rc3-rc3.png?2414?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.bulbasaur {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/swshp-swsh-black-star-promos/EN/med/bulbasaur-pr-sw-swsh303-swsh303.png?5316?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.squirtle {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/bw7-boundaries-crossed/en/med/squirtle-29149-29.png?9922?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.pikachu {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/swsh11-lost-origin/en/med/pikachu-lor-52-52.png?1068?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.raichu {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/swsh12-silver-tempest/en/med/raichu-sit-50-50.png?3433?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.charizard {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/swsh9-brilliant-stars/en/med/charizard-v-17172-17.png?3006?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.venusaur {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/pokemon-go/en/med/venusaur-pgo-3-3.png?5952?');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-front.blastoise {
+    background-image: url('https://cdn.cardsrealm.com/images/cartas/pokemon-go/en/med/blastoise-pgo-17-17.png?4477?&width=250');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
+/* Estilo básico do botão */
+#btnMute {
+    position: absolute;
+    bottom: 94vh;
+    left: 95%;
+    padding: 0;
+    background-image: url('/assets/mute-2-32.png'); /* Caminho da sua imagem */
+    background-size: cover; /* Isso vai cobrir todo o espaço do botão com a imagem */
+    text-indent: -9999px; /* Remove qualquer texto dentro do botão */
+    border: none;
+    cursor: pointer;
+    width: 40px; /* Tamanho do botão */
+    height: 40px; /* Tamanho do botão */
+    background-color: transparent; /* Garante que o fundo do botão seja transparente */
+    box-shadow: none; /* Remove sombras que possam estar interferindo */
 }
