@@ -7,8 +7,6 @@ const pokemonPairs = [
   
   // Duplica os pares para criar um total de cartas
 const cards = pokemonPairs.flatMap(pair => [pair.base, pair.evolution]);
-  
-
 
 // Função para embaralhar as cartas
 function shuffle(array) {
@@ -74,6 +72,9 @@ createBoard();
 let firstCard = null; // Armazena a primeira carta selecionada
 let secondCard = null; // Armazena a segunda carta selecionada
 let lockBoard = false; // Impede cliques enquanto a lógica de jogo está em processamento
+let counterMatch = 0; // Conta vezes foi encontrado par válido
+const textMessage = document.getElementById("message");
+const buttonRestart = document.getElementById("buttonRestart");
 
 // Adiciona um listener de clique ao tabuleiro do jogo
 gameBoard.addEventListener("click", function (e) {
@@ -110,6 +111,9 @@ function checkMatch() {
     // 1. Adiciona a classe "matched" para indicar que as cartas foram combinadas.
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
+    counterMatch += 2; // Contador de cartas encontradas é atualizado
+    checkVictory(); // Checa se todos os pares foram encontrados
+    textMessage.innerHTML =  "Par encontrado, encontre o próximo par!" 
     // 2. Reseta a seleção para permitir novas jogadas
     resetSelection();
   } else {
@@ -118,6 +122,7 @@ function checkMatch() {
     setTimeout(() => {
       firstCard.classList.remove("flipped");
       secondCard.classList.remove("flipped");
+      textMessage.innerHTML =  "Par não encontrado, tente novamente!"
       // 2. Reseta a seleção para permitir novas jogadas
       resetSelection();
     }, 1000); // Dá ao jogador tempo para memorizar as cartas antes de escondê-las novamente
@@ -144,4 +149,21 @@ function resetSelection() {
   lockBoard = false;
 }
 
+//Função para verificar se todos os pares foram encontrados
+function checkVictory() {
+  //Verifica se o contador de cartas reveladas é igual ao total de cartas
+  if (counterMatch == cards.length){
 
+  }
+}
+
+buttonRestart.addEventListener("click", function() {
+  // Cartas são embaralhadas novamente e tabuleiro é recriado
+  shuffle(cards);
+  createBoard();
+  // Variavéis são reiniciadas
+  firstCard = null; 
+  secondCard = null; 
+  lockBoard = false; 
+  counterMatch = 0;
+});
