@@ -13,7 +13,7 @@
 body {
     height: 100vh;
     display: flex;
-    background-image: url('/assets/fundo.jpeg');
+    background-image: url(../assets/fundo.jpeg);
     background-size: cover;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -141,7 +141,7 @@ a {
 }
 
 .card-back {
-    background-image: url('/assets/carta.png');
+    background-image: url(../assets/carta.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -218,7 +218,7 @@ a {
     bottom: 94vh;
     left: 95%;
     padding: 0;
-    background-image: url('/assets/mute-2-32.png'); /* Caminho da sua imagem */
+    background-image: url(../assets/mute-2-32.png); /* Caminho da sua imagem */
     background-size: cover; /* Isso vai cobrir todo o espaço do botão com a imagem */
     text-indent: -9999px; /* Remove qualquer texto dentro do botão */
     border: none;
