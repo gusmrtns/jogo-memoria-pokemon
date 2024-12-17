@@ -1,24 +1,19 @@
 const pokemonPairs = [
-    { base: "Charmander", evolution: "Charizard" },
-    { base: "Bulbasaur", evolution: "Venusaur" },
-    { base: "Squirtle", evolution: "Blastoise" },
-    { base: "Pikachu", evolution: "Raichu" },
-  ];
-  
-  // Duplica os pares para criar um total de cartas
-const cards = pokemonPairs.flatMap(pair => [pair.base, pair.evolution]);
-  
+  { base: "Charmander", evolution: "Charizard" },
+  { base: "Bulbasaur", evolution: "Venusaur" },
+  { base: "Squirtle", evolution: "Blastoise" },
+  { base: "Pikachu", evolution: "Raichu" },
+];
 
+// Duplica os pares para criar um total de cartas
+const cards = pokemonPairs.flatMap(pair => [pair.base, pair.evolution]);
 
 // Função para embaralhar as cartas
 function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        // logica para trocar os elementos de lugar:
-        // 1. Gerar um índice aleatório entre 0 e i
-        // 2. Trocar o elemento de índice i com o elemento de índice aleatório
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 
 // Embaralha as cartas
@@ -26,122 +21,104 @@ shuffle(cards);
 
 // Seleciona o elemento do tabuleiro do jogo
 const gameBoard = document.getElementById("game-board");
+const textMessage = document.getElementById("message");
+const buttonRestart = document.getElementById("buttonRestart");
 
 // Função para criar o tabuleiro
 function createBoard() {
-    // Limpa o tabuleiro anterior antes de criar um novo
-    // Motivo: Isso garante que, caso a função seja chamada novamente (por exemplo, para reiniciar o jogo),
-    // não haja cartas duplicadas ou elementos antigos no tabuleiro.
-    gameBoard.innerHTML = "";
+  gameBoard.innerHTML = ""; // Limpa o tabuleiro anterior
 
-    // Percorre o array de cartas (`cards`) e cria elementos HTML para cada uma delas
-    cards.forEach((pokemon, index) => {
-        // Cria um elemento `div` para representar a carta
-        const card = document.createElement("div");
+  cards.forEach((pokemon, index) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.pokemon = pokemon;
+    card.id = `card-${index}`;
 
-        // Adiciona a classe "card" ao elemento
-        // Motivo: Isso facilita a estilização com CSS e o reconhecimento das cartas no jogo.
-        card.classList.add("card");
+    // Adiciona a classe com o nome do Pokémon à frente da carta para aplicar a imagem
+    card.innerHTML = `
+      <div class="card-back"></div>
+      <div class="card-front ${pokemon.toLowerCase()}"></div>
+    `;
 
-        // Adiciona o nome do Pokémon no atributo `data-pokemon`
-        // Motivo: O atributo `data-pokemon` é usado para identificar a carta durante a verificação de pares,
-        // mantendo as informações necessárias sem expor visualmente o conteúdo ao jogador.
-        card.dataset.pokemon = pokemon;
-
-        // Define um ID único para cada carta
-        // Motivo: O ID pode ser útil para rastrear cartas específicas, embora não seja essencial para a lógica principal.
-        card.id = `card-${index}`;
-
-        // Define o conteúdo interno da carta
-        // A estrutura `<div class="card-back"></div>` representa o verso da carta (visível inicialmente).
-        // A estrutura `<div class="card-front">${pokemon}</div>` representa a frente da carta (visível após ser "virada").
-        card.innerHTML = `
-            <div class="card-back"></div>
-            <div class="card-front">${pokemon}</div>
-        `;
-
-        // Adiciona a carta criada ao tabuleiro
-        // Motivo: Sem este passo, as cartas criadas existiriam na memória, mas não seriam visíveis no DOM,
-        // ou seja, não apareceriam para o jogador.
-        gameBoard.appendChild(card);
-    });
+    gameBoard.appendChild(card);
+  });
 }
 
-  
 createBoard();
-  
-// Variáveis para controlar o estado do jogo
-let firstCard = null; // Armazena a primeira carta selecionada
-let secondCard = null; // Armazena a segunda carta selecionada
-let lockBoard = false; // Impede cliques enquanto a lógica de jogo está em processamento
 
-// Adiciona um listener de clique ao tabuleiro do jogo
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let counterMatch = 0;
+
 gameBoard.addEventListener("click", function (e) {
-  const clickedCard = e.target.parentElement; // Garante que o clique seja tratado no elemento da carta
+  const clickedCard = e.target.closest(".card");
 
-  // Verifica condições para evitar interações incorretas:
-  // 1. O clique deve ser em uma carta.
-  // 2. O tabuleiro não deve estar "travado" (lockBoard).
-  // 3. A carta clicada não pode ser a mesma já selecionada como `firstCard`.
-  if (!clickedCard.classList.contains("card") || lockBoard || clickedCard === firstCard) return;
+  // Verifica se a carta clicada é válida
+  if (!clickedCard || 
+      lockBoard || 
+      clickedCard === firstCard || 
+      clickedCard.classList.contains("matched") || 
+      clickedCard.classList.contains("flipped")) return;
 
-  // Revela a carta clicada adicionando a classe "flipped"
   clickedCard.classList.add("flipped");
 
   if (!firstCard) {
-    // Se esta for a primeira carta selecionada, armazena na variável
     firstCard = clickedCard;
   } else {
-    // Caso seja a segunda carta, armazena na variável e bloqueia o tabuleiro temporariamente
     secondCard = clickedCard;
-    lockBoard = true; // Isso evita que o jogador clique em mais cartas enquanto o par está sendo verificado
-
-    // Verifica se as duas cartas selecionadas formam um par válido
+    lockBoard = true;
     checkMatch();
   }
 });
 
-// Função para verificar se as cartas formam um par correspondente
 function checkMatch() {
   const isMatch = isEvolutionPair(firstCard.dataset.pokemon, secondCard.dataset.pokemon);
 
   if (isMatch) {
-    // Se as cartas forem um par:
-    // 1. Adiciona a classe "matched" para indicar que as cartas foram combinadas.
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
-    // 2. Reseta a seleção para permitir novas jogadas
+    counterMatch += 2;
+    textMessage.innerHTML = "Par encontrado, encontre o próximo par!";
+    checkVictory();
     resetSelection();
   } else {
-    // Se não forem um par:
-    // 1. Reverte as cartas após 1 segundo, removendo a classe "flipped".
     setTimeout(() => {
       firstCard.classList.remove("flipped");
       secondCard.classList.remove("flipped");
-      // 2. Reseta a seleção para permitir novas jogadas
+      textMessage.innerHTML = "Par não encontrado, tente novamente!";
       resetSelection();
-    }, 1000); // Dá ao jogador tempo para memorizar as cartas antes de escondê-las novamente
+    }, 1000);
   }
 }
 
-// Função para verificar se duas cartas representam um par de evolução
 function isEvolutionPair(card1, card2) {
-  // Compara se as cartas formam um par válido, usando o array `pokemonPairs`.
-  // Retorna `true` se:
-  // 1. `card1` for a base e `card2` for a evolução.
-  // 2. `card1` for a evolução e `card2` for a base.
-  return pokemonPairs.some(pair => 
+  return pokemonPairs.some(pair =>
     (pair.base === card1 && pair.evolution === card2) || 
     (pair.base === card2 && pair.evolution === card1)
   );
 }
 
-// Reseta o estado do jogo para permitir que novas cartas sejam selecionadas
 function resetSelection() {
-  // Limpa as variáveis de seleção
   [firstCard, secondCard] = [null, null];
-  // Desbloqueia o tabuleiro
   lockBoard = false;
 }
 
+function checkVictory() {
+  if (counterMatch === cards.length) {
+    textMessage.innerHTML = "Parabéns, você encontrou todos os pares!";
+  }
+}
+
+buttonRestart.addEventListener("click", function() {
+  // Cartas são embaralhadas novamente e tabuleiro é recriado
+  shuffle(cards);
+  createBoard();
+  // Variáveis são reiniciadas
+  firstCard = null; 
+  secondCard = null; 
+  lockBoard = false; 
+  counterMatch = 0;
+  textMessage.innerHTML = "Jogo reiniciado! Encontre os pares!";
+});
 

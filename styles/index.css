@@ -1,114 +1,132 @@
+/* ----------------------------------------
+   RESET GLOBAL E ESTILIZAÇÃO BÁSICA
+---------------------------------------- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
+/* ----------------------------------------
+   ESTILO DO CORPO DA PÁGINA
+---------------------------------------- */
 body {
-    height: 100vh;
-    display: flex;
-    background-image: url(/assets/fundo.jpeg);
-    background-size: cover;
+    height: 100vh; 
+    display: flex; 
+    background-image: url(/assets/fundo.jpeg); 
+    background-size: cover; 
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); 
 }
 
+/* ----------------------------------------
+   ESTILO DO CONTAINER PRINCIPAL
+---------------------------------------- */
 main {
-    width: 100%;
+    width: 100%; 
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 }
 
+/* ----------------------------------------
+   ESTILO DO JOGO (CONTAINER PRINCIPAL DO JOGO)
+---------------------------------------- */
 .start-game {
-    width: 60%;
-    height: 80%;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 60%; 
+    height: 80%; 
+    background-color: black; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
     justify-content: center;
-    gap: 5em;
-    border-radius: 5%;
+    gap: 5em; 
+    border-radius: 5%; 
 }
 
+/* ----------------------------------------
+   ESTILO DOS TÍTULOS 
+---------------------------------------- */
 .titles {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2em;
-    row-gap: 0.5em;
+    color: white; /* Texto branco */
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    flex-direction: column; /* Organiza os títulos na vertical */
+    justify-content: center; /* Alinha os itens no centro */
+    align-items: center; /* Alinha os itens no centro */
+    margin-top: 2em; /* Espaçamento acima */
+    row-gap: 0.5em; /* Espaço entre os títulos */
 }
 
 .titles h1 {
-    font-size: 2em;
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    font-style: normal;
+    font-size: 5em; /* Tamanho grande de fonte */
+    font-family: "Press Start 2P", system-ui; /* Fonte retro */
+    font-weight: 400; /* Peso normal */
+    font-style: normal; /* Sem estilo itálico */
 }
 
 .titles h2 {
-    font-size: 2em;
-    font-family: "Handjet", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
+    font-size: 4em; /* Tamanho grande, mas menor que o H1 */
+    font-family: "Handjet", sans-serif; /* Fonte moderna */
+    font-optical-sizing: auto; /* Ajuste de largura das letras */
+    font-weight: 600; /* Peso semi-negrito */
+    font-style: normal; /* Sem estilo itálico */
 }
 
+/* ----------------------------------------
+   ESTILO DOS BOTÕES
+---------------------------------------- */
 .buttons {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Usa flexbox para organizar os botões */
+    flex-direction: column; /* Organiza os botões na vertical */
 }
 
-/* Estilizando o link para parecer um botão */
+
 #a-btn {
-    display: inline-block;
-    text-align: center;
-    color: black;
-    font-family: "Handjet", sans-serif;
-    padding: 1em 3em;
-    font-weight: 800;
-    font-size: 1.2em;
-    text-decoration: none;
-    background-color: white;
-    border-radius: 5%;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Faz o link se comportar como um bloco inline */
+    text-align: center; /* Centraliza o texto do botão */
+    color: black; /* Cor do texto */
+    font-family: "Handjet", sans-serif; /* Fonte do texto */
+    padding: 3em 6em; /* Espaçamento interno para criar o efeito de botão */
+    font-weight: 800; /* Peso de fonte grosso */
+    font-size: 1.2em; /* Tamanho de fonte moderado */
+    text-decoration: none; /* Remove sublinhado do link */
+    background-color: white; /* Cor de fundo branca */
+    border-radius: 5%; /* Bordas arredondadas */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves para cor e tamanho */
 }
 
 #a-btn:hover {
-    background-color: lightgray;
-    transform: scale(1.05);
+    background-color: lightgray; /* Muda a cor de fundo para cinza claro */
+    transform: scale(1.05); /* Aumenta um pouco o tamanho do botão */
 }
 
+/* ----------------------------------------
+   ESTILO DO CONTADOR DE VITÓRIAS
+---------------------------------------- */
 .contador {
-    color: white;
-    margin-top: 2em;
-    font-family: "Handjet", sans-serif;
-    font-weight: 800;
-    font-size: 1.2em;
-    text-decoration: none;
-    text-align: center;
+    color: white; /* Texto branco */
+    margin-top: 2em; /* Espaçamento acima */
+    font-family: "Handjet", sans-serif; /* Fonte moderna */
+    font-weight: 800; /* Peso de fonte grosso */
+    font-size: 2em; /* Tamanho grande de fonte */
+    text-decoration: none; /* Remove sublinhado */
+    text-align: center; /* Centraliza o texto */
 }
 
-/* Overlay de escurecimento */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease-in-out;
-    z-index: 9999;
-}
 
-/* Ativando o efeito ao clicar no link */
-#a-btn:focus ~ .overlay {
-    opacity: 1;
-    pointer-events: auto;
+#btnMute {
+    position: absolute;
+    bottom: 94vh;
+    left: 95%;
+    padding: 0;
+    background-image: url('/assets/mute-2-32.png'); /* Caminho da sua imagem */
+    background-size: cover; /* Isso vai cobrir todo o espaço do botão com a imagem */
+    text-indent: -9999px; /* Remove qualquer texto dentro do botão */
+    border: none;
+    cursor: pointer;
+    width: 40px; /* Tamanho do botão */
+    height: 40px; /* Tamanho do botão */
+    background-color: transparent; /* Garante que o fundo do botão seja transparente */
+    box-shadow: none; /* Remove sombras que possam estar interferindo */
 }
