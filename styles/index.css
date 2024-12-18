@@ -14,7 +14,9 @@ body {
     height: 100vh; 
     display: flex; 
     background-image: url(../assets/fundo.jpeg); 
-    background-size: cover;  /*alterações joão wesley*/ 
+    background-size: cover;
+    background-repeat: no-repeat; /*alterações joão wesley*/
+    background-position: center;  /*alterações joão wesley*/ 
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px); 
 }
