@@ -44,7 +44,16 @@ main {
     gap: 5em; 
     border-radius: 5%; 
 }
-
+/* ----------------------------------------
+   JW: responsividade do fundo do jogo;
+---------------------------------------- */
+@media (max-width: 556px) {   /* alteração João wesley para largura do fundo preto*/
+    .start-game {
+      width: 90%;/* Largura fixa para telas menores que 556px */
+      border-radius: 5%; 
+      height: 60%;
+    }
+  }
 /* ----------------------------------------
    ESTILO DOS TÍTULOS 
 ---------------------------------------- */
@@ -59,14 +68,14 @@ main {
 }
 
 .titles h1 {
-    font-size: 5em; /* Tamanho grande de fonte */
+    font-size: clamp(2em, 10vw , 7em); /* Tamanho grande de fonte                          João Wesley: responsividade gradual*/
     font-family: "Press Start 2P", system-ui; /* Fonte retro */
     font-weight: 400; /* Peso normal */
     font-style: normal; /* Sem estilo itálico */
 }
 
 .titles h2 {
-    font-size: 4em; /* Tamanho grande, mas menor que o H1 */
+    font-size: clamp(1em, 5vw , 4em); /* Tamanho grande, mas menor que o H1                João Wesley: responsividade gradual*/
     font-family: "Handjet", sans-serif; /* Fonte moderna */
     font-optical-sizing: auto; /* Ajuste de largura das letras */
     font-weight: 600; /* Peso semi-negrito */
@@ -89,7 +98,7 @@ main {
     font-family: "Handjet", sans-serif; /* Fonte do texto */
     padding: 3em 6em; /* Espaçamento interno para criar o efeito de botão */
     font-weight: 800; /* Peso de fonte grosso */
-    font-size: 1.2em; /* Tamanho de fonte moderado */
+    font-size: clamp(0.6., 1.2, 2.4em); /* Tamanho de fonte moderado                   João Wesley: responsividade do botão*/
     text-decoration: none; /* Remove sublinhado do link */
     background-color: white; /* Cor de fundo branca */
     border-radius: 5%; /* Bordas arredondadas */
